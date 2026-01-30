@@ -64,7 +64,8 @@ public class TaskOutputsEntityMapper implements EntityMapper {
                 outputEntity.setValue(JSONUtils.valueToString(value).getBytes(StandardCharsets.UTF_8));
                 outputEntity.setJavaType(value.getClass().getName());
             }
-            repository.persist(outputEntity);
+            // No explicit persist needed: parent has @OneToMany(cascade = CascadeType.ALL),
+            // so child entities are automatically persisted when the parent is saved.
         });
     }
 
