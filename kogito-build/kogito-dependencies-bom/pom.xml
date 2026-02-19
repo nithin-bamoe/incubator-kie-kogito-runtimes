@@ -170,6 +170,8 @@
 
     <version.tomcat.embed.core>10.1.48</version.tomcat.embed.core>
     <version.at.yawk.lz4.java>1.10.1</version.at.yawk.lz4.java> <!-- Upgraded for CVE fix (The library has moved from org.lz4:lz4-java to at.yawk.lz4:lz4-java )-->
+    <version.org.hibernate>7.1.14.Final</version.org.hibernate>
+  
   </properties>
 
   <dependencyManagement>
@@ -1349,7 +1351,11 @@
         <artifactId>testcontainers-toxiproxy</artifactId>
         <version>${version.org.testcontainers}</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${version.org.hibernate}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
