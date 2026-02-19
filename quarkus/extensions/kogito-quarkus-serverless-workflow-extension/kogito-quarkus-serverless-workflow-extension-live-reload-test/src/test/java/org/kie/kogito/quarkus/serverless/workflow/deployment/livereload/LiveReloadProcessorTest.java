@@ -32,9 +32,11 @@ import java.util.stream.Stream;
 
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.parallel.Execution;
 import org.kie.kogito.test.utils.SocketUtils;
@@ -60,7 +62,8 @@ import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Execution(SAME_THREAD)
-@Disabled("Disabled temporarily - live reload tests are unstable in dev mode")
+@TestMethodOrder(OrderAnnotation.class)
+//@Disabled("Disabled temporarily - live reload tests are unstable in dev mode")
 public class LiveReloadProcessorTest {
 
     private static final int PORT = SocketUtils.findAvailablePort();
@@ -117,6 +120,7 @@ public class LiveReloadProcessorTest {
     }
 
     @Test
+    @Order(2)
     void testOpenApi() throws IOException {
         given()
                 .contentType(ContentType.JSON)
@@ -143,6 +147,7 @@ public class LiveReloadProcessorTest {
     }
 
     @Test
+    @Order(3)
     void testGrpc() throws InterruptedException, IOException {
         Server server = GreeterService.buildServer(PORT);
         server.start();
@@ -176,6 +181,7 @@ public class LiveReloadProcessorTest {
     }
 
     @Test
+    @Order(1)
     void testAsyncApi() throws IOException {
         given()
                 .contentType(ContentType.JSON)
