@@ -63,8 +63,7 @@ public class TaskMetadataEntityMapper implements EntityMapper {
                 metadataEntity.setValue(JSONUtils.valueToString(value));
                 metadataEntity.setJavaType(value.getClass().getName());
             }
-            // No explicit persist needed: parent has @OneToMany(cascade = CascadeType.ALL),
-            // so child entities are automatically persisted when the parent is saved.
+
         });
     }
 
